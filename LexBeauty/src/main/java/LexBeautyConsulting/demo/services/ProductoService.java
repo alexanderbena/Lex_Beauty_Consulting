@@ -33,7 +33,7 @@ public class ProductoService {
     }
     
     @Transactional(readOnly = true)
-    public Optional<Productos> getProduto(Integer idProducto) {
+    public Optional<Productos> getProducto(Integer idProducto) {
         return productoRepository.findById(idProducto);
     }
     
