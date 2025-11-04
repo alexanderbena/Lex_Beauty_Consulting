@@ -30,19 +30,22 @@ public class Categorias implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    // Activa o inactiva
-    @Column(nullable = false)
-    private boolean activo = true;
-
     // Fechas
     @Column(name = "fecha_creacion", updatable = false)
     private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion = LocalDateTime.now();
+    
+    //Manejar ruta de la categoria
+    @Column(length=1024)
+    @Size(max=1024)
+    private String rutaImagen;
+    
+    private boolean activo;
 
     // Relación uno a muchos: una categoría tiene muchos productos
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "categoria")
     private List<Productos> productos;
 
     // Métodos automáticos para asignar fechas con el LocalDateTime

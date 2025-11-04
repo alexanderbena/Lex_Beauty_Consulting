@@ -32,10 +32,6 @@ public class Productos implements Serializable {
     @Size(max = 150, message = "La descripción no puede superar los 150 caracteres.")
     private String descripcion;
 
-    // Si el producto está activo o no (0 o 1)
-    @Column(nullable = false)
-    private boolean activo = true;
-
     // Precio del producto
     @Column(nullable = false, precision = 10, scale = 2)
     @NotNull(message = "El precio es obligatorio.")
@@ -54,6 +50,11 @@ public class Productos implements Serializable {
     // Fecha de última modificación
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion = LocalDateTime.now();
+    
+    //Ruta de la Imagen
+    @Column(name = "ruta_imagen", length = 1024)
+    private String rutaImagen;
+    private boolean activo;
 
     // Relación con categoría (muchos productos -> una categoría)
     @ManyToOne
