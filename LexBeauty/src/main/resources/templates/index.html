@@ -1,15 +1,63 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"      
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{general/fragmentos :: head}"></head>
     <body>
-        <div>Prueba para ver si la config y los properties estan bien</div>
+
+        <header th:replace="~{general/fragmentos :: header}"></header>
+
+        <!-- Banner principal -->
+        <section class="text-center p-5" style="background-color:#ecb6c4;">
+            <h1 class="fw-bold text-white">Todo para que resaltes tu belleza</h1>
+            <p class="text-white fs-5">Compra fácil, rápido y seguro</p>
+            <a th:href="@{/producto/listado}" class="btn btn-success btn-lg mt-3">Ver Productos</a>
+        </section>
+
+        <!-- Productos destacados -->
+        <section class="container text-center mt-5">
+            <h2 class="text-primary mb-4">Productos Destacados</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <img th:src="@{/img/Productos/rimel.webp}" class="img-fluid mb-2" alt="Rímel">
+                    <h5>Rímel</h5>
+                    <p class="text-danger">₡10,000.00</p>
+                </div>
+                <div class="col-md-2">
+                    <img th:src="@{/img/Productos/Labial.webp}" class="img-fluid mb-2" alt="Labial">
+                    <h5>Labial</h5>
+                    <p class="text-danger">₡29,900.00</p>
+                </div>
+                <div class="col-md-2">
+                    <img th:src="@{/img/Productos/set_perfume.webp}" class="img-fluid mb-2" alt="Estuches">
+                    <h5>Set Mon Paris Yves Saint Eau De Parfum</h5>
+                    <p class="text-danger">₡94,500.00</p>
+                </div>
+                <div class="col-md-2">
+                    <img th:src="@{/img/Productos/sombras.webp}" class="img-fluid mb-2" alt="Sombras">
+                    <h5>Sombra Cuarteto So Fierce - Thats a Dub</h5>
+                    <p class="text-danger">₡13,400.00</p>
+                </div>
+                <div class="col-md-2">
+                    <img th:src="@{/img/Productos/skin_care.webp}" class="img-fluid mb-2" alt="Cuidado de la piel">
+                    <h5>Sophieskin Serum Hydraboost</h5>
+                    <p class="text-danger">₡17,130.80
+</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marcas distribuidas -->
+        <section class="container text-center my-5">
+            <h3 class="text-primary mb-4">Marcas que distribuimos</h3>
+            <div class="d-flex justify-content-center gap-4 flex-wrap">
+                <img th:src="@{/img/Marcas/Maybelline.png}" alt="Maybelline" height="40">
+                <img th:src="@{/img/Marcas/La-Roche-Posay.png}" alt="La Roche Posay" height="40">
+                <img th:src="@{/img/Marcas/cerave.png}" alt="Cerave" height="40">
+                <img th:src="@{/img/Marcas/MAC-Cosmetics.png}" alt=" MAC Cosmetics" height="40">
+            </div>
+        </section>
+
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
     </body>
 </html>

@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/productos")
+@RequestMapping("/producto")
 public class ProductoController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class ProductoController {
         model.addAttribute("totalProductos", productos.size());
         var categorias = categoriaService.getCategorias(true);
         model.addAttribute("categorias", categorias);
-        return "/producto/listado";
+        return "producto/listado";
     }
     
     //Obtener los mensajes de las properties anteriormente definidas
@@ -72,17 +72,16 @@ public class ProductoController {
     }
     
     
-    @GetMapping("/usuario/modificar/{idUsuario}")
+    @GetMapping("/modificar/{idProducto}")  
     public String modificar(@PathVariable("idProducto") Integer idProducto, Model model, RedirectAttributes redirectAttributes) {
         Optional<Productos> productoOpt = productoService.getProducto(idProducto);
         if (productoOpt.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", messageSource.getMessage("producto.error01", null, Locale.getDefault()));
-            return "redirect:/producto/listado";
+            return "redirect:/producto/listado";  
         }
         model.addAttribute("producto", productoOpt.get());
         var categorias = categoriaService.getCategorias(true);
         model.addAttribute("categorias", categorias);
         return "/producto/modifica";
     }
-
 }

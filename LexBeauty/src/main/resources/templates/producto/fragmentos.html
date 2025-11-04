@@ -1,0 +1,73 @@
+<!-- fragments/productosCarrusel.html -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"      
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Productos Carrusel</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:fragment="productosCarrusel(productos)" class="container my-5">
+    <h3 class="text-center fw-bold mb-4 text-uppercase">Productos Destacados</h3>
+    <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div th:each="prod, iterStat : ${productos}" 
+                 th:class="'carousel-item ' + (${iterStat.index == 0} ? 'active' : '')">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 400px;">
+                    <div class="card border-0 shadow-sm" style="width: 22rem;">
+                        <div class="position-relative">
+                            <img th:src="@{${prod.rutaImagen}}" class="card-img-top rounded" 
+                                 alt="Imagen producto" style="height: 250px; object-fit: cover;">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 rounded"></div>
+                            
+                            <!-- Badge de stock -->
+                            <span th:if="${prod.stock > 0}" 
+                                  class="position-absolute top-0 end-0 m-2 badge bg-success">
+                                En Stock
+                            </span>
+                            <span th:if="${prod.stock == 0}" 
+                                  class="position-absolute top-0 end-0 m-2 badge bg-danger">
+                                Agotado
+                            </span>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 th:text="${prod.nombreProducto}" class="fw-bold text-dark mb-2"></h5>
+                            <p th:text="${prod.descripcion}" class="small text-muted mb-2"></p>
+                            
+                            <!-- Categoría -->
+                            <span th:if="${prod.categoria != null}" 
+                                  class="badge bg-secondary mb-2" 
+                                  th:text="${prod.categoria.nombreCategoria}">
+                            </span>
+                            
+                            <p class="fs-4 fw-bold text-success mb-3">
+                                <span th:text="'₡:' + ${#numbers.formatDecimal(prod.precio, 1, 2)}"></span>
+                            </p>
+                            
+                            <!-- Stock disponible -->
+                            <p class="small text-muted mb-3">
+                                Stock disponible: <span th:text="${prod.stock}" class="fw-semibold"></span>
+                            </p>
+                            
+                            <a th:href="@{'/productos/detalle/' + ${prod.idProducto}}" 
+                               class="btn btn-dark mt-2">
+                                <i class="fas fa-eye"></i> Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductos" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselProductos" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+</body>
+</html>

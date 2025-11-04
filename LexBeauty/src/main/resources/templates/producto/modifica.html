@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Producto</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body class="bg-light">
+
+    <!-- Header -->
+    <div th:replace="~{general/fragmentos :: header}"></div>
+
+    <!-- Contenido principal -->
+    <div class="container py-5">
+        <div class="col-md-8 mx-auto">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-dark text-white d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Modificar Producto</h5>
+                    <i class="fas fa-pen-to-square"></i>
+                </div>
+
+                <div class="card-body bg-white">
+                    <form th:action="@{/producto/guardar}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="idProducto" th:value="${producto.idProducto}" />
+
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nombre del Producto</label>
+                            <input type="text" name="nombreProducto" th:value="${producto.nombreProducto}" 
+                                   class="form-control" placeholder="Ingrese el nombre" required maxlength="150">
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Descripción</label>
+                            <textarea name="descripcion" class="form-control" rows="3" 
+                                      placeholder="Descripción del producto" required maxlength="150" 
+                                      th:text="${producto.descripcion}"></textarea>
+                        </div>
+
+                        <!-- Categoría -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Categoría</label>
+                            <select name="categoria.idCategoria" class="form-select" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option th:each="cat : ${categorias}" 
+                                        th:value="${cat.idCategoria}" 
+                                        th:text="${cat.nombreCategoria}"
+                                        th:selected="${producto.categoria != null && producto.categoria.idCategoria == cat.idCategoria}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Precio y Stock -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Precio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₡</span>
+                                    <input type="number" name="precio" th:value="${producto.precio}" 
+                                           class="form-control" placeholder="0.00" step="0.01" min="0.01" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Stock</label>
+                                <input type="number" name="stock" th:value="${producto.stock}" 
+                                       class="form-control" placeholder="0" min="0" required>
+                            </div>
+                        </div>
+
+                        <!-- Imagen actual -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Imagen Actual</label><br>
+                            <img th:src="@{${producto.rutaImagen}}" alt="Imagen producto"
+                                 class="rounded border shadow-sm" style="width:140px;height:140px;object-fit:cover;">
+                        </div>
+
+                        <!-- Cambiar imagen -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Cambiar Imagen</label>
+                            <input type="file" name="imagenFile" class="form-control" accept="image/*">
+                        </div>
+
+                        <!-- Estado activo -->
+                        <div class="form-check form-switch mb-4">
+                            <input class="form-check-input" type="checkbox" name="activo" 
+                                   id="activo" th:checked="${producto.activo}">
+                            <label class="form-check-label fw-semibold" for="activo">Activo</label>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/producto/listado}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Volver
+                            </a>
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fas fa-save"></i> Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{general/fragmentos :: footer}"></div>
+
+</body>
+</html>
