@@ -1,0 +1,27 @@
+package LexBeautyConsulting.demo.domain;
+
+import lombok.Data;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+@Entity
+@Table(name="rol")
+public class Rol implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_rol")
+    private Integer idRol;
+
+    @Column(name = "nombre_rol", nullable = false, unique = true, length = 35)
+    @NotBlank(message = "El rol no puede estar vacío.")
+    private String nombreRol; // ADMIN, CLIENTE
+
+    @ManyToMany(mappedBy = "roles")
+    private List<Usuario> usuarios;
+}
