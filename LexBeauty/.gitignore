@@ -32,3 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
+### Firebase ###
+src/main/resources/firebase
+###application.properties###
+src/main/resources/application.properties
+
+
+
