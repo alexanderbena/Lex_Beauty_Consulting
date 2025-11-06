@@ -68,7 +68,8 @@ public class ProjectConfig implements WebMvcConfigurer{
     public SecurityFilterChain sfc (HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/registro/**", "/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
-                .requestMatchers("/admin/**", "/categoria/**", "/producto/**").hasRole("ADMIN")
+                .requestMatchers("/categoria/**", "/producto/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/cliente/**").hasRole("CLIENTE")
                 .anyRequest().authenticated()
         ).formLogin(form -> form // LOGIN

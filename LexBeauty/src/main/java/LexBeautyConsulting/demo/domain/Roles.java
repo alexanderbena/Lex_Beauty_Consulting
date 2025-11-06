@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="rol")
+@Table(name="Rol")
 public class Roles implements Serializable {
 
     private static final long serialVersionUID = 1L;
