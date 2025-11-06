@@ -34,3 +34,5 @@ build/
 
 ### Firebase ###
 /templates/firebase
+###application.properties###
+src/main/resources/application.properties
