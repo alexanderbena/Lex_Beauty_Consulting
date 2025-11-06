@@ -55,4 +55,8 @@ public class UsuarioService implements UserDetailsService {
         u.setRoles(rolRepository.findByNombreRol("ROLE_ADMIN"));
         usuarioRepository.save(u);
     }
+
+    public Usuarios findByEmail(String email){
+        return usuarioRepository.findByEmail(email).orElse(null);
+    }
 }
